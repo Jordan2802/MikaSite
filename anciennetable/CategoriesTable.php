@@ -4,7 +4,7 @@ namespace App\Table;
 
 use App\App;
 
-class Categorie extends Table{
+class CategoriesTable extends Table{
 
     protected static $table = 'categories';
 

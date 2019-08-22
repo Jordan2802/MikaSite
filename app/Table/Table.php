@@ -3,45 +3,27 @@
 namespace App\Table;
 
 use App\App;
+use App\Database\Database;
 
 class Table{
 
-    protected static $table;
+   protected $table;
+   protected $db;
 
-    
+   public function __construct(Database $db){
+       $this->db = $db;
+       if(is_null($this->table)){
 
-    public static function all(){
-        return App::getDb()->query(
-        "   SELECT *
-            FROM ". static::$table ." 
-        ", get_called_class());
-    }
+           $parts = explode('\\',get_class($this));
+           $class_name = end($parts);
+           $this->table = strtolower(str_replace('Table', '', $class_name));
+       }
 
-    public function __get($key){
-        $method = 'get' .ucfirst($key);
-        $this->$key = $this->$method();
-        return $this->$key;
-    }
+   }
 
-
-    public static function find($id){
-        return static::query(
-            "   SELECT *
-                FROM ". static::$table ."
-                WHERE id = ? 
-            ",[$id], true);
-    }
-
-
-    public static function query($statement, $attributes = null, $one =false){
-
-        if($attributes){
-            return App::getDb()->prepare($statement, $attributes, get_called_class(), $one);
-        } else{
-            return App::getDb()->query($statement, get_called_class(), $one);
-        }
-        
-    }
+   public function all(){
+    return $this->db->query('SELECT * FROM posts');
+   }
     
 
 }

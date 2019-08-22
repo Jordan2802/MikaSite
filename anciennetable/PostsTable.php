@@ -4,7 +4,7 @@ namespace App\Table;
 
 use App\App;
 
-class Article extends Table{
+class PostsTable extends Table{
 
     protected static $table = 'posts';
 
