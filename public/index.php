@@ -1,18 +1,30 @@
 <?php
-session_start();
-use App\App;
-use App\Config;
-use App\Autoloader;
-
-
-require '../app/Autoloader.php';
-Autoloader::register();
+define('ROOT', dirname(__DIR__));
+require ROOT .'/app/App.php';
+App::load();
 
 
 $app = App::getInstance();
 
 
-$posts = $app->getTable('Posts');
+$posts = $app->getTable('Post');
 
-var_dump($posts->all());
 
+if(isset($_GET['p'])){
+    $page = $_GET['p'];
+} else{
+    $page = 'home';
+}
+
+ob_start();
+if($page === 'home' ) {
+    require ROOT . '/pages/posts/home.php';
+}elseif($page ==='posts.category'){
+    require ROOT . '/pages/posts/category.php';
+}elseif($page ==='posts.show'){
+    require ROOT . '/pages/posts/show.php';
+}
+
+$content = ob_get_clean();
+
+require ROOT .'/pages/templates/default.php';
