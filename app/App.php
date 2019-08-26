@@ -40,4 +40,14 @@ class App{
         require ROOT . '/core/Autoloader.php';
         Core\Autoloader::register();
     }
+
+    public function forbidden(){
+        header('HTTP/1.0 403 Forbidden');
+        die('Acces Interdit');
+    }
+
+    public function notFound(){
+        header('HTTP/1.0 404 Not Found');
+        die('Page Introuvable');
+    }
 }

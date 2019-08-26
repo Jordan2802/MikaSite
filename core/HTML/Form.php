@@ -1,4 +1,5 @@
 <?php
+namespace Core\HTML;
 
 /**
  * Class Form
@@ -38,18 +39,25 @@ class Form{
      * @param $index array
      */
     protected function getValue($index){
-
+        if(is_object($this->data)){
+            return $this->data->$index;
+        }
         return isset($this->data[$index]) ? $this->data[$index] : null;
     }
 
+
     /**
      * @param $name string
+     * @param $label
+     * @param $options
      * @return string
      */
-    public function input($name) {
+    public function input($name, $label, $options = []) {
 
-        return $this->surround('<input type="text" name="' . $name .'" value="'. $this->getValue($name) .'">');
+        $type = isset($options['type']) ? $options['type'] : 'text';
+        return $this->surround('<input type="'.$type.'" name="' . $name .'" value="'. $this->getValue($name) .'">');
     }
+
 
     /**
      * @return string
@@ -58,4 +66,7 @@ class Form{
 
         return $this->surround('<button type="submit">Evoyer</button>');
     }
+
+   
+
 }
