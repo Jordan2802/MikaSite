@@ -3,7 +3,7 @@ namespace App\Controller\Admin;
 
 use Core\HTML\BootstrapForm;
 
-class CategoriesController extends AppController{
+class CategoriesController extends \App\Controller\Admin\AppController{
 
     public function __construct(){
         parent::__construct();
@@ -25,7 +25,7 @@ class CategoriesController extends AppController{
             return $this->index();
             
         }
-        $form = new BootstrapForm($category);
+        $form = new BootstrapForm();
         $this->render('admin.categories.edit', compact('form'));
     }
 

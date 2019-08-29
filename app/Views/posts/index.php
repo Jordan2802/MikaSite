@@ -1,8 +1,3 @@
-<?php
-use App\Table\Categorie;
-
-?>
-
 <div class="row">
 
     <div class="col-sm-8">

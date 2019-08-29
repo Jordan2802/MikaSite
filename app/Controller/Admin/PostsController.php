@@ -3,7 +3,7 @@ namespace App\Controller\Admin;
 
 use Core\HTML\BootstrapForm;
 
-class PostsController extends AppController{
+class PostsController extends \App\Controller\Admin\AppController{
 
     public function __construct(){
         parent::__construct();
@@ -19,7 +19,7 @@ class PostsController extends AppController{
     public function add(){
 
         if(!empty($_POST)){
-            $result = $$this->Post->create([
+            $result = $this->Post->create([
                 'titre' => $_POST['titre'],
                 'contenu' => $_POST['contenu'],
                 'category_id' => $_POST['category_id']
